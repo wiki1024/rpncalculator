@@ -1,47 +1,49 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# intellij files
+.idea/
+*.iml
+*.ipr
+*.iws
+build-idea/
 
-# Folder config file
-Desktop.ini
+# eclipse files
+.project
+.classpath
+.settings
+build-eclipse/
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# netbeans files
+nb-configuration.xml
+nbactions.xml
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# gradle stuff
+.gradle/
+build/
 
-# Windows shortcuts
-*.lnk
+# gradle wrapper 
+/gradle/
+gradlew
+gradlew.bat
 
-# =========================
-# Operating System Files
-# =========================
+# maven stuff (to be removed when trunk becomes 4.x)
+*-execution-hints.log
+target/
+dependency-reduced-pom.xml
 
-# OSX
-# =========================
+# testing stuff
+**/.local*
+.vagrant/
+/logs/
 
+# osx stuff
 .DS_Store
-.AppleDouble
-.LSOverride
 
-# Thumbnails
-._*
+# default folders in which the create_bwc_index.py expects to find old es versions in
+/backwards
+/dev-tools/backwards
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+# needed in case docs build is run...maybe we can configure doc build to generate files under build?
+html_docs
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# random old stuff that we should look at the necessity of...
+/tmp/
+eclipse-build
