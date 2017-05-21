@@ -165,6 +165,7 @@ public class Calculator {
     }
 
     public static BigDecimal newtonMethodSqrt2(BigDecimal operand) {
+        if(operand.compareTo(BigDecimal.ZERO)==0) return BigDecimal.ZERO;
         BigDecimal result = operand;
         while(true) {
             BigDecimal last = result;
