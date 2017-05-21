@@ -145,9 +145,11 @@ public class Calculator {
     }
 
     private void clearStack() {
-        Deque<BigDecimal> oldStack = operandStack;
-        operandStack = new ArrayDeque<>(64);
-        operationHistory.push(new ClearRPNActionRecord(oldStack));
+//        Deque<BigDecimal> oldStack = operandStack;
+//        operandStack = new ArrayDeque<>(64);
+//        operationHistory.push(new ClearRPNActionRecord(oldStack));
+        operandStack.clear();
+        operationHistory.clear();
     }
 
     private void doSqrt(int pos) throws RPNException {
@@ -268,24 +270,24 @@ public class Calculator {
         }
     }
 
-    public class ClearRPNActionRecord implements RPNActionRecord {
-
-        private Deque<BigDecimal> previousStack;
-
-        public ClearRPNActionRecord(Deque<BigDecimal> previousStack) {
-            this.previousStack = previousStack;
-        }
-
-        @Override
-        public void undo() {
-            operandStack = previousStack;
-        }
-
-        @Override
-        public String toString() {
-            return ClearRPNActionRecord.class.getSimpleName();
-        }
-    }
+//    public class ClearRPNActionRecord implements RPNActionRecord {
+//
+//        private Deque<BigDecimal> previousStack;
+//
+//        public ClearRPNActionRecord(Deque<BigDecimal> previousStack) {
+//            this.previousStack = previousStack;
+//        }
+//
+//        @Override
+//        public void undo() {
+//            operandStack = previousStack;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return ClearRPNActionRecord.class.getSimpleName();
+//        }
+//    }
 
     public class PushRPNActionRecord implements RPNActionRecord {
 
