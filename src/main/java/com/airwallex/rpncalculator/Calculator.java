@@ -165,13 +165,13 @@ public class Calculator {
     }
 
     public static BigDecimal newtonMethodSqrt2(BigDecimal operand) {
-        if(operand.compareTo(BigDecimal.ZERO)==0) return BigDecimal.ZERO;
+        if (operand.compareTo(BigDecimal.ZERO) == 0) return BigDecimal.ZERO;
         BigDecimal result = operand;
-        while(true) {
+        while (true) {
             BigDecimal last = result;
-            result = result.add(operand.divide(result,20, BigDecimal.ROUND_HALF_UP)).divide(TWO, 20,BigDecimal.ROUND_HALF_UP);
-            if(result.add(last.negate()).abs().add(precE).compareTo(BigDecimal.ZERO) < 0)
-            break;
+            result = result.add(operand.divide(result, 20, BigDecimal.ROUND_HALF_UP)).divide(TWO, 20, BigDecimal.ROUND_HALF_UP);
+            if (result.add(last.negate()).abs().add(precE).compareTo(BigDecimal.ZERO) < 0)
+                break;
         }
         return result;
     }
