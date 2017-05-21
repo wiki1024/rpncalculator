@@ -64,7 +64,6 @@ public class Calculator {
         String[] tokens = input.split(SEPARATOR);
         int pos = 1;
         for (String token : tokens) {
-            if(StringUtil.isNullOrEmpty(token)) continue;
             if (token.equals(TOKEN_QUIT)) {
                 return true;
             }
@@ -147,14 +146,11 @@ public class Calculator {
         BigDecimal op = operandStack.removeLast();
         if (op.compareTo(BigDecimal.ZERO) < 0) {
             operandStack.addLast(op);
-            throw new RPNException(String.format("A negative value %s cannot perform a square root.",formatBigDecimal(op)));
         }
-        BigDecimal result = new BigDecimal(Math.sqrt(op.doubleValue()));
         operandStack.addLast(result);
         operationHistory.push(new SqrtRPNActionRecord(op));
     }
 
-    private void undo()  {
         if (!operationHistory.isEmpty()) {
             RPNActionRecord previousAction = operationHistory.pop();
             previousAction.undo();
@@ -269,8 +265,6 @@ public class Calculator {
     public class PushRPNActionRecord implements RPNActionRecord {
 
         @Override
-        public void undo()  {
-            assert  operandStack.size() != 0;
             operandStack.removeLast();
         }
 
