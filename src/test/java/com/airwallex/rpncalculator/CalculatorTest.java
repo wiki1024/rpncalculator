@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 /**
- * use equalTo insteadOf compareEqualTo for BigDecimal, needs to match scale
+ * use equalTo insteadOf compareEqualTo for BigDecimal, need to match scale
  */
 public class CalculatorTest {
     @Test
