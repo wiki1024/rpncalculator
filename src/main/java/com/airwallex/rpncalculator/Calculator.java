@@ -166,7 +166,6 @@ public class Calculator {
 
     public static BigDecimal newtonMethodSqrt2(BigDecimal operand) {
         BigDecimal result = operand;
-
         while(true) {
             BigDecimal last = result;
             result = result.add(operand.divide(result,20, BigDecimal.ROUND_HALF_UP)).divide(TWO, 20,BigDecimal.ROUND_HALF_UP);
@@ -190,7 +189,6 @@ public class Calculator {
         BigDecimal op2 = operandStack.removeLast();
         BigDecimal op1 = operandStack.removeLast();
         try {
-
             BigDecimal result = operation.compute(op1, op2);
             operandStack.addLast(result);
             operationHistory.push(new BinaryRPNActionRecord(op1, op2));
