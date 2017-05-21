@@ -1,7 +1,6 @@
 package com.airwallex.rpncalculator;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -20,6 +19,9 @@ public class Calculator {
     private static final ArrayList<Operation> BINARY_LAMBDAS;
     private static final String SEPARATOR = "\\s+";
     private static final String TOKEN_QUIT = ":q";
+    private static final BigDecimal TWO = new BigDecimal(2);
+    private static final int sqrtPrecision = 20;
+    private static BigDecimal precE;
 
     static {
         BINARY_LAMBDAS = new ArrayList<>();
@@ -36,6 +38,13 @@ public class Calculator {
             if (op2.compareTo(BigDecimal.ZERO) == 0) throw new RPNException("Divisor cannot be zero.");
             return op1.divide(op2, 15, BigDecimal.ROUND_HALF_UP);
         });
+
+        String e = "-0.";
+        for (int i = 0; i < sqrtPrecision; i++) {
+            e += "0";
+        }
+        e += "1";
+        precE = new BigDecimal(e);
     }
 
     private Deque<BigDecimal> operandStack;
@@ -64,6 +73,7 @@ public class Calculator {
         String[] tokens = input.split(SEPARATOR);
         int pos = 1;
         for (String token : tokens) {
+            if (StringUtil.isNullOrEmpty(token)) continue;
             if (token.equals(TOKEN_QUIT)) {
                 return true;
             }
@@ -146,11 +156,27 @@ public class Calculator {
         BigDecimal op = operandStack.removeLast();
         if (op.compareTo(BigDecimal.ZERO) < 0) {
             operandStack.addLast(op);
+            throw new RPNException(String.format("A negative value %s cannot perform a square root.", formatBigDecimal(op)));
         }
+
+        BigDecimal result = newtonMethodSqrt2(op);
         operandStack.addLast(result);
         operationHistory.push(new SqrtRPNActionRecord(op));
     }
 
+    public static BigDecimal newtonMethodSqrt2(BigDecimal operand) {
+        BigDecimal result = operand;
+
+        while(true) {
+            BigDecimal last = result;
+            result = result.add(operand.divide(result,20, BigDecimal.ROUND_HALF_UP)).divide(TWO, 20,BigDecimal.ROUND_HALF_UP);
+            if(result.add(last.negate()).abs().add(precE).compareTo(BigDecimal.ZERO) < 0)
+            break;
+        }
+        return result;
+    }
+
+    private void undo() {
         if (!operationHistory.isEmpty()) {
             RPNActionRecord previousAction = operationHistory.pop();
             previousAction.undo();
@@ -265,6 +291,8 @@ public class Calculator {
     public class PushRPNActionRecord implements RPNActionRecord {
 
         @Override
+        public void undo() {
+            assert operandStack.size() != 0;
             operandStack.removeLast();
         }
 
