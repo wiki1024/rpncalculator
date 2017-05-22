@@ -1,10 +1,9 @@
 package com.airwallex.rpncalculator.operators;
 
-import com.airwallex.rpncalculator.Action;
+import com.airwallex.rpncalculator.ActionRecord;
 import com.airwallex.rpncalculator.RPNException;
 import com.airwallex.rpncalculator.Stack;
-import com.airwallex.rpncalculator.Token;
-import com.airwallex.rpncalculator.actions.BinaryAction;
+import com.airwallex.rpncalculator.actions.BinaryActionRecord;
 
 import java.math.BigDecimal;
 
@@ -16,7 +15,7 @@ public abstract class BinaryOperator implements OperatorToken {
     protected abstract BigDecimal compute(BigDecimal op1, BigDecimal op2) throws RPNException;
 
     @Override
-    public Action Execute(Stack stack, int pos) throws RPNException {
+    public ActionRecord Execute(Stack stack, int pos) throws RPNException {
         if (stack.size() < 2)
             throw new RPNException(String.format("Operator %s (position: %d): insufficient parameters.", getOperatorSymbol(), pos));
         BigDecimal op2 = stack.pop();
@@ -24,7 +23,7 @@ public abstract class BinaryOperator implements OperatorToken {
         try {
             BigDecimal result = compute(op1, op2);
             stack.push(result);
-            return new BinaryAction(op1, op2);
+            return new BinaryActionRecord(op1, op2);
         } catch (RPNException rpnEx) {
             stack.push(op1);
             stack.push(op2);

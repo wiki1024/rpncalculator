@@ -11,9 +11,9 @@ public interface Stack {
     void push(BigDecimal item);
     void undo();
     void clear();
-    void record(Action record);
+    void record(ActionRecord record);
     String printStack();
     String printHistory();
     BigDecimal[] getOperandStackArray();
-    Action[] getOperationHistoryArray();
+    ActionRecord[] getOperationHistoryArray();
 }

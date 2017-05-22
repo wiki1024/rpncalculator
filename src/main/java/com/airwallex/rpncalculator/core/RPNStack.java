@@ -1,11 +1,10 @@
 package com.airwallex.rpncalculator.core;
 
-import com.airwallex.rpncalculator.Action;
+import com.airwallex.rpncalculator.ActionRecord;
 import com.airwallex.rpncalculator.BigDecimalFormatter;
 import com.airwallex.rpncalculator.Stack;
 
 import java.math.BigDecimal;
-import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 public class RPNStack implements Stack {
 
     private Deque<BigDecimal> internalStack;
-    private Deque<Action> history;
+    private Deque<ActionRecord> history;
     private BigDecimalFormatter formatter;
 
     public RPNStack(BigDecimalFormatter formatter) {
@@ -43,7 +42,7 @@ public class RPNStack implements Stack {
     @Override
     public void undo() {
         if (history.size() > 0) {
-            Action action=history.pop();
+            ActionRecord action=history.pop();
             action.undo(this);
         }
     }
@@ -55,7 +54,7 @@ public class RPNStack implements Stack {
     }
 
     @Override
-    public void record(Action record) {
+    public void record(ActionRecord record) {
         history.push(record);
     }
 
@@ -79,8 +78,8 @@ public class RPNStack implements Stack {
     }
 
     @Override
-    public Action[] getOperationHistoryArray() {
-        return history.toArray(new Action[history.size()]);
+    public ActionRecord[] getOperationHistoryArray() {
+        return history.toArray(new ActionRecord[history.size()]);
     }
 
 }

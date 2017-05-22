@@ -11,11 +11,8 @@ import java.math.BigDecimal;
  * Created by wikic on 5/23/2017.
  */
 public class RPNTokenizer implements Tokenizer {
-    private OperatorStore operatorStore;
 
-    public RPNTokenizer() {
-        this(new RPNOperatorStore());
-    }
+    private OperatorStore operatorStore;
 
     public RPNTokenizer(OperatorStore opStore){
         operatorStore=opStore;

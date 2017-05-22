@@ -2,6 +2,8 @@ package com.airwallex.rpncalculator;
 
 import com.airwallex.rpncalculator.core.*;
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Scanner;
 
@@ -12,11 +14,9 @@ public class Program {
     final static Logger logger = Logger.getLogger(Calculator.class);
 
     public static void main(String[] args) {
-        Stack stack=new RPNStack(new RPNFormatter());
-        Parser parser= new RPNParser();
-        Tokenizer tokenizer=new RPNTokenizer();
 
-        Calculator calc = new Calculator(stack,parser,tokenizer);
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Calculator calc =(Calculator) context.getBean("calculator");
         System.out.println("Welcome to RPNCalculator.");
         try (Scanner scan = new Scanner(System.in)) {
             while (true) {
@@ -29,7 +29,6 @@ public class Program {
                         System.out.println(e.getMessage());
                     }
                     System.out.println(calc.print());
-                    //System.out.println(calc.printHistory());
                 }
             }
         } catch (Exception ex) {

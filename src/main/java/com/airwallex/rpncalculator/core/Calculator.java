@@ -1,7 +1,7 @@
 package com.airwallex.rpncalculator.core;
 
 import com.airwallex.rpncalculator.*;
-import com.airwallex.rpncalculator.actions.EmptyAction;
+import com.airwallex.rpncalculator.actions.EmptyActionRecord;
 
 /**
  * Created by wikic on 5/23/2017.
@@ -22,13 +22,13 @@ public class Calculator {
         int pos = 1;
         for (String key : keys) {
             Token token = tokenizer.getToken(key);
-            Action action = token.Execute(stack,pos++);
-            if(action instanceof EmptyAction) continue;
+            ActionRecord action = token.Execute(stack, pos++);
+            if (action instanceof EmptyActionRecord) continue;
             stack.record(action);
         }
     }
 
-    public String print(){
+    public String print() {
         return stack.printStack();
     }
 }

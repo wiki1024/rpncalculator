@@ -20,7 +20,7 @@
 //        assertThat(stackArray[2], equalTo(new BigDecimal("3.14159265358979323846264338")));
 //        assertThat(stackArray[1], equalTo(new BigDecimal("4.482337867831652712019091")));
 //        assertThat(stackArray[0], equalTo(new BigDecimal("5.58209749445923078164062862")));
-//        Action[] records = calc.getOperationHistoryArray();
+//        ActionRecord[] records = calc.getOperationHistoryArray();
 //        assertThat(records[0], instanceOf(Calculator.PushRPNActionRecord.class));
 //        assertThat(records[1], instanceOf(Calculator.PushRPNActionRecord.class));
 //        assertThat(records[2], instanceOf(Calculator.PushRPNActionRecord.class));
@@ -107,7 +107,7 @@
 //            assertThat(rpnEx.getMessage(), equalTo("Divisor cannot be zero."));
 //        }
 //        BigDecimal[] stackArray = calc.getOperandStackArray();
-//        Action[] recordArray = calc.getOperationHistoryArray();
+//        ActionRecord[] recordArray = calc.getOperationHistoryArray();
 //        assertThat(stackArray.length, is(6));
 //        assertThat(recordArray.length, is(6));
 //        assertThat(stackArray[5], comparesEqualTo(BigDecimal.ZERO));
@@ -125,7 +125,7 @@
 //            assertThat(rpnEx.getMessage(), equalTo("A negative value -22 cannot perform a square root."));
 //        }
 //        BigDecimal[] stackArray = calc.getOperandStackArray();
-//        Action[] recordArray = calc.getOperationHistoryArray();
+//        ActionRecord[] recordArray = calc.getOperationHistoryArray();
 //        assertThat(stackArray.length, is(6));
 //        assertThat(stackArray[5], equalTo(new BigDecimal("-22")));
 //        assertThat(recordArray.length, is(8));

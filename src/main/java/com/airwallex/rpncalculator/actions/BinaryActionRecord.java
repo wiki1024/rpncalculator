@@ -1,6 +1,6 @@
 package com.airwallex.rpncalculator.actions;
 
-import com.airwallex.rpncalculator.Action;
+import com.airwallex.rpncalculator.ActionRecord;
 import com.airwallex.rpncalculator.Stack;
 
 import java.math.BigDecimal;
@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 /**
  * Created by wikic on 5/23/2017.
  */
-public class BinaryAction implements Action {
+public class BinaryActionRecord implements ActionRecord {
 
-    public BinaryAction(BigDecimal op1, BigDecimal op2) {
+    public BinaryActionRecord(BigDecimal op1, BigDecimal op2) {
         this.op1 = op1;
         this.op2 = op2;
     }
@@ -36,6 +36,6 @@ public class BinaryAction implements Action {
 
     @Override
     public String toString() {
-        return BinaryAction.class.getSimpleName();
+        return BinaryActionRecord.class.getSimpleName();
     }
 }
