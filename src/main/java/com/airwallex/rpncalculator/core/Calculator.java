@@ -22,9 +22,8 @@ public class Calculator {
         int pos = 1;
         for (String key : keys) {
             Token token = tokenizer.getToken(key);
-            ActionRecord action = token.Execute(stack, pos++);
-            if (action instanceof EmptyActionRecord) continue;
-            stack.record(action);
+            ActionRecord record = token.Execute(stack, pos++);
+            stack.record(record);
         }
     }
 

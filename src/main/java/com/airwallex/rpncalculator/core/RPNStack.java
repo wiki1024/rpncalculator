@@ -3,6 +3,7 @@ package com.airwallex.rpncalculator.core;
 import com.airwallex.rpncalculator.ActionRecord;
 import com.airwallex.rpncalculator.BigDecimalFormatter;
 import com.airwallex.rpncalculator.Stack;
+import com.airwallex.rpncalculator.actions.EmptyActionRecord;
 
 import java.math.BigDecimal;
 import java.util.Deque;
@@ -55,6 +56,7 @@ public class RPNStack implements Stack {
 
     @Override
     public void record(ActionRecord record) {
+        if (record instanceof EmptyActionRecord) return;
         history.push(record);
     }
 
